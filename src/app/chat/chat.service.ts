@@ -18,15 +18,16 @@ export class ChatService{
     
     constructor (private _http:Http){}
     
-    token: string = 'xoxp-242800904082-243689296838-243342828245-40f450b3381f2c87fa68f2a1adae816b';
+    //token: string = 'xoxp-242800904082-243689296838-243342828245-40f450b3381f2c87fa68f2a1adae816b';
+    token: string = 'xoxp-242800904082-243689296838-244939044631-0d9fa179c2d328c19c3e26cdc2481560';
     channel: string = 'D74TNMLLD';
     
     sendMessage(messageToSend){
-        return 'sendMessagePrueba';//TEMPORAL
+        //return 'sendMessagePrueba';//TEMPORAL
         
-        /*return this._http.get('https://slack.com/api/chat.postMessage?token='+this.token+'&id=1&type=message&channel='+this.channel+'&text='+messageToSend)
+        return this._http.get('https://slack.com/api/chat.postMessage?token='+this.token+'&id=1&type=message&channel='+this.channel+'&text='+messageToSend)
             .toPromise()
-            .then((res:any)=>res.json());*/
+            .then((res:any)=>res.json());
         
     }
     

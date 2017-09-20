@@ -16,7 +16,7 @@ export class MessagesComponent implements OnInit{
  
     constructor (private _chatService:ChatService, private _resolver:ComponentFactoryResolver){
         
-        setInterval(()=>{this.updateMessages()}, 5000)
+        //setInterval(()=>{this.updateMessages()}, 5000)
 
     }
   
@@ -26,9 +26,8 @@ export class MessagesComponent implements OnInit{
         this._chatService.getConversationHistory()
             .subscribe(
                 messages=>{
-                            
-                    messages.messages.forEach(message=>{this.writeNewMessage(message)})
-                    
+                    console.log(messages);
+                    messages.messages.forEach(message=>{this.writeNewMessage(message)})  
                 }
             )
     }
@@ -46,17 +45,25 @@ export class MessagesComponent implements OnInit{
     @ViewChild ("newMessageContainer", {read:ViewContainerRef}) newMessageContainer;
 
     writeNewMessage(messageInfo){
-
-        const messageFactory = this._resolver.resolveComponentFactory(MessageComponent);
-        const messageRef = this.newMessageContainer.createComponent(messageFactory);
-        
-        messageRef.instance.messageInfo = messageInfo;
-
+        /*
+            Sacamos el user de messageInfo y a partir de ahi pedimos informacion de usuario(getUserInfo)
+            Una vez obenemos la informacion del usuario mostramos el mensaje
+        */
+        let userInfo;
         this._chatService.getUserInfo(messageInfo.user)
             .subscribe(
                 user=>{
                     if (user.profile)
-                        messageRef.instance.userInfo = user.profile;
+                        //messageRef.instance.userInfo = user.profile;
+                        userInfo = user.profile;
+                },
+                err=>console.log('There was an error: '+err),
+                ()=>{
+                    const messageFactory = this._resolver.resolveComponentFactory(MessageComponent);
+                    const messageRef = this.newMessageContainer.createComponent(messageFactory);
+        
+                    messageRef.instance.messageInfo = messageInfo;
+                    messageRef.instance.userInfo = userInfo;
                 }
             );
         
