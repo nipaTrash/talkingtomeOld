@@ -11,6 +11,8 @@ export class ChatService{
     
     constructor (private http:Http, private slackOAuthService:SlackOAuthService){}
     
+    pruebaDisplay = false;
+    
     token: string = this.slackOAuthService.token;
     channel: string = this.slackOAuthService.channel;
     

@@ -7,12 +7,8 @@ import { SlackOAuthService } from './slack-oauth.service';
 })
 export class SlackOAuthDirective{
     
-    @Input() slack_oauth;
-    
-    @HostBinding() innerText='loguearse';
     
     code = '';
-    //loginStatus = false;
 
     constructor (private slackOAuthService:SlackOAuthService){
 
@@ -34,16 +30,7 @@ export class SlackOAuthDirective{
     getOAuth(code:string): void{
                 
         this.slackOAuthService.getOAuth(this.code)
-        //    .subscribe(res=>console.log(res));
 
     }
     
-    /*@HostListener('click') onClick(){
-        //console.log('boton para loguearse');
-        this.slackOAuthService.login().subscribe(
-            result=>console.log(result),
-            err=>console.log('this is the error: '+err),
-            ()=>console.log('complete')
-        );
-    }*/
 }

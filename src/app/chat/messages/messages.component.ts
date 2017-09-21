@@ -26,8 +26,7 @@ export class MessagesComponent implements OnInit{
         setInterval(()=>{this.updateMessages()}, 1000)
 
     }
-  
-    
+        
     ngOnInit(){
 
         this.messagesService.getConversationHistory()
@@ -44,9 +43,7 @@ export class MessagesComponent implements OnInit{
     lastMessageUtc = 0;
 
     updateMessages(){
-        
-        //const newMessages = this.messagesService.getNewMessages(this.lastMessageUtc);
-        
+                
         this.messagesService.getNewMessages(this.lastMessageUtc)
             .subscribe(
                 newMessages=>{
@@ -56,8 +53,6 @@ export class MessagesComponent implements OnInit{
                 },
                 err=>console.log('Problema al cargar nuevos mensajes: '+err) 
             )
-        //console.log(newMessages);
-        //newMessages.forEach(message=>{this.writeNewMessage(message)})
                         
     }
     

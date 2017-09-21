@@ -1,7 +1,10 @@
-
+<md-card class="chat">
     <messages></messages>
+
     <md-form-field>
       <textarea mdInput placeholder="Escribe mensaje" #message></textarea>
     </md-form-field>
-    <button md-button (click)="sendMessage(message.value)">Enviar</button>{{messageResult | json}}
-    
+    <button md-button (click)="sendMessage(message.value)" color="primary" class="btn-send-message">Enviar</button>
+
+</md-card>
+

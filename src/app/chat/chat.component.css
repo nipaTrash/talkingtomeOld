@@ -1,0 +1,15 @@
+.chat{
+    margin:0 auto;
+    float:left;
+    width:400px;
+    height:500px;
+    overflow:hidden;
+}
+md-form-field,
+#message{
+    width:100%;
+}
+.btn-send-message{
+    float:right;
+    background-color:lightblue;
+}

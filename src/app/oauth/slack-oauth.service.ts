@@ -10,15 +10,14 @@ export class SlackOAuthService{
     
     constructor (private http:Http){}
     
-    OAuth;
+    OAuth = {ok:false,access_token:'notoken'};
+    
+    OAuthToken:string = 'no token';
     OAuthOk = false;
     
     token: string = 'xoxp-242800904082-243689296838-244065043859-5bf833ff7491b01c167c5bf9c30a498as';
-    channel: string = 'D74TNMLLD';
-    
-    loginStatus = false;
-    
-    scope = 'chat%3Awrite%3Abot+chat%3Awrite%3Auser+groups%3Ahistory+im%3Ahistory+mpim%3Ahistory+users%3Aprofile%3Aread';
+    channel: string = '';
+        
     client_id = '';
     client_secret = '';
 
@@ -35,9 +34,11 @@ export class SlackOAuthService{
                 resp=> {
                     this.OAuth = resp.json(); 
                     this.OAuthOk = this.OAuth.ok;
-                    console.log(this.OAuth.ok)
+                    this.OAuthToken = this.OAuth.access_token;
+                    console.log(this.OAuthToken)
                 }
             );
     }
+    
 }
 

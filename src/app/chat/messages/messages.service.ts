@@ -8,16 +8,14 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class MessagesService{
     
-  
+
     constructor (private http:Http, private slackOAuthService:SlackOAuthService){}
-
-    //token: string = this.slackOAuthService.token;
-    //channel: string = this.slackOAuthService.channel;
-
-   // token: string = this.slackOAuthService.OAuth['access_token']? this.slackOAuthService.OAuth['access_token'] : false;
-    token: string = this.slackOAuthService.token;
+   
+    //Necesitamos coger el token que consigue slackOAuthService
+    //token: string = this.slackOAuthService.OAuth.access_token;
     
-    channel: string = this.slackOAuthService.channel;
+    token: string = 'xoxp-242800904082-243689296838-244065043859-5bf833ff7491b01c167c5bf9c30a498as';
+    channel: string = 'D74TNMLLD';
 
     getConversationHistory(){
 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MdInputModule } from '@angular/material';
+import { MdCardModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdButtonModule } from '@angular/material';
 
@@ -17,6 +18,7 @@ import { MessagesModule } from './messages/messages.module';
     imports:[
         CommonModule,
         MdInputModule,
+        MdCardModule,
         BrowserAnimationsModule,
         MdButtonModule,
         MessagesModule
