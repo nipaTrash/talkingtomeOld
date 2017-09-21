@@ -8,8 +8,8 @@ export class SlackOAuthService{
     constructor (private _http:Http){}
     
     scope = 'chat%3Awrite%3Abot+chat%3Awrite%3Auser+groups%3Ahistory+im%3Ahistory+mpim%3Ahistory+users%3Aprofile%3Aread';
-    client_id = '242800904082%2E242306321777';
-    client_secret = '6fbd00bd7c036cd6c951cf6a0aa7ed5e';
+    client_id = '';
+    client_secret = '';
     loginUrl = 'https://slack.com/oauth/authorize?client_id='+this.client_id+'&scope='+this.scope+'&team=T74PJSL2E';
     login(){
         //console.log('login desde service');
