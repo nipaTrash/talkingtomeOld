@@ -8,15 +8,14 @@ import { ChatService } from './chat.service';
 })
 export class ChatComponent{
      
-    constructor (private _chatService:ChatService){}
+    constructor (private chatService:ChatService){}
+    
     
     messageResult;
-    
-    
-    
+     
     sendMessage(messageToSend){
         
-        this.messageResult = this._chatService.sendMessage(messageToSend);
+        this.messageResult = this.chatService.sendMessage(messageToSend);
 
     }
 }

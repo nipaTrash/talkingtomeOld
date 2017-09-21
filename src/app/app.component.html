@@ -1,15 +1,12 @@
-<chat></chat>
+{{OAuthOk}}<chat *ngIf="OAuthOk"></chat>
+
+<div *ngIf="!OAuthOk">
+    <a href="https://slack.com/oauth/authorize?scope=identity.basic&client_id=242800904082.242306321777"><img src="https://api.slack.com/img/sign_in_with_slack.png" /></a>
+</div>
 
 <button [slack_oauth]="quesital"></button>
-<!--The content below is only a placeholder and can be replaced.-->
 
 
-<!--<form>
-      
-  <md-form-field>
-      <textarea mdInput placeholder="aquii"></textarea>
-  </md-form-field>
-</form>
+<!--<a href="https://slack.com/oauth/authorize?scope=incoming-webhook,commands,bot&client_id=242800904082.242306321777&redirect_uri=http://localhost:4200/"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>-->
 
-<button (click)="login()">loguearsssse</button>{{token | json}}-->
 

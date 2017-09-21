@@ -1,31 +1,44 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
+
+import 'rxjs/add/operator/map';
+
 @Injectable()
 export class SlackOAuthService{
     
     
-    constructor (private _http:Http){}
+    constructor (private http:Http){}
+    
+    OAuth;
+    OAuthOk = false;
+    
+    token: string = 'xoxp-242800904082-243689296838-244065043859-5bf833ff7491b01c167c5bf9c30a498as';
+    channel: string = 'D74TNMLLD';
+    
+    loginStatus = false;
     
     scope = 'chat%3Awrite%3Abot+chat%3Awrite%3Auser+groups%3Ahistory+im%3Ahistory+mpim%3Ahistory+users%3Aprofile%3Aread';
-    client_id = '242800904082%2E242306321777';
-    client_secret = '6fbd00bd7c036cd6c951cf6a0aa7ed5e';
-    loginUrl = 'https://slack.com/oauth/authorize?client_id='+this.client_id+'&scope='+this.scope+'&team=T74PJSL2E';
-    login(){
-        //console.log('login desde service');
-        //this._http.get('https://slack.com/oauth/authorize?client_id='+this.client_id+'&client_secret='+this.client_secret)
-       // return this._http.get('https://slack.com/oauth/authorize?client_id='+this.client_id+'&scope='+this.scope+'&team=T74PJSL2E');
-        //return this._http.get('https://slack.com/api/auth.test?token=xoxp-242800904082-243689296838-243230566032-bb040de69d0675ace498d1198407668e&pretty=1');
-        
-        
-        const headerDict = {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Access-Control-Allow-Headers': 'Content-Type',
-        }
+    client_id = '';
+    client_secret = '';
 
-        const headerObj = new Headers(headerDict);                                                                                           
+    
+    
+    oauthUrl = 'https://slack.com/api/oauth.access';
+    
+    
 
-        return this._http.get(this.loginUrl, headerObj)
+    getOAuth(code:string){
+        return this.http.get(this.oauthUrl+'?client_id='+this.client_id+'&client_secret='+this.client_secret+'&code='+code)
+            .toPromise()
+            //.then(resp=>console.log(resp['_body'].access_token));
+            .then(
+                resp=> {
+                    this.OAuth = resp.json(); 
+                    this.OAuthOk = this.OAuth.ok;
+                    console.log(this.OAuth.ok)
+                }
+            );
     }
+    
 }

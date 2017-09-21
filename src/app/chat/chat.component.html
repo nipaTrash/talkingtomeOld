@@ -1,5 +1,7 @@
-<messages></messages>
-<md-form-field>
-  <textarea mdInput placeholder="Escribe mensaje" #message></textarea>
-</md-form-field>
-<button md-button (click)="sendMessage(message.value)">Enviar</button>{{messageResult | json}}
+
+    <messages></messages>
+    <md-form-field>
+      <textarea mdInput placeholder="Escribe mensaje" #message></textarea>
+    </md-form-field>
+    <button md-button (click)="sendMessage(message.value)">Enviar</button>{{messageResult | json}}
+    

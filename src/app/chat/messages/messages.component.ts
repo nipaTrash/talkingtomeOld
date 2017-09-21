@@ -1,6 +1,9 @@
 import { Component, OnInit, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
-import { ChatService } from './chat.service';
-import { UserInfo } from './user-info';
+
+import { MessagesService } from './messages.service';
+import { UserService } from '../../user/user.service';
+
+import { UserInfo } from '../../user/user-info';
 
 import { MessageComponent } from './message.component';
 
@@ -14,21 +17,27 @@ import 'rxjs/add/operator/map';
 export class MessagesComponent implements OnInit{
     
  
-    constructor (private _chatService:ChatService, private _resolver:ComponentFactoryResolver){
+    constructor (
+        private messagesService:MessagesService, 
+        private userService:UserService, 
+        private resolver:ComponentFactoryResolver
+        ){
         
-        //setInterval(()=>{this.updateMessages()}, 5000)
+        setInterval(()=>{this.updateMessages()}, 1000)
 
     }
   
     
     ngOnInit(){
 
-        this._chatService.getConversationHistory()
+        this.messagesService.getConversationHistory()
             .subscribe(
                 messages=>{
-                    console.log(messages);
-                    messages.messages.forEach(message=>{this.writeNewMessage(message)})  
-                }
+                    if (messages.ok){
+                        messages.messages.forEach(message=>{this.writeNewMessage(message)})  
+                    }
+                },
+                err=>console.log('Problema al cargar historial: ' +err)
             )
     }
     
@@ -36,9 +45,19 @@ export class MessagesComponent implements OnInit{
 
     updateMessages(){
         
-        const newMessages = this._chatService.getNewMessages(this.lastMessageUtc);
+        //const newMessages = this.messagesService.getNewMessages(this.lastMessageUtc);
         
-        newMessages.forEach(message=>{this.writeNewMessage(message)})
+        this.messagesService.getNewMessages(this.lastMessageUtc)
+            .subscribe(
+                newMessages=>{
+                    if (newMessages.ok){
+                        newMessages.forEach(message=>{this.writeNewMessage(message)});
+                    }
+                },
+                err=>console.log('Problema al cargar nuevos mensajes: '+err) 
+            )
+        //console.log(newMessages);
+        //newMessages.forEach(message=>{this.writeNewMessage(message)})
                         
     }
     
@@ -50,16 +69,16 @@ export class MessagesComponent implements OnInit{
             Una vez obenemos la informacion del usuario mostramos el mensaje
         */
         let userInfo;
-        this._chatService.getUserInfo(messageInfo.user)
+        this.userService.getUserInfo(messageInfo.user)
             .subscribe(
                 user=>{
-                    if (user.profile)
-                        //messageRef.instance.userInfo = user.profile;
+                    if (user.profile){
                         userInfo = user.profile;
+                    }
                 },
                 err=>console.log('There was an error: '+err),
                 ()=>{
-                    const messageFactory = this._resolver.resolveComponentFactory(MessageComponent);
+                    const messageFactory = this.resolver.resolveComponentFactory(MessageComponent);
                     const messageRef = this.newMessageContainer.createComponent(messageFactory);
         
                     messageRef.instance.messageInfo = messageInfo;

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { SlackOAuthService } from './oauth/slack-oauth.service';
+
 //import { ChatComponent } from './chat/chat.component';
 
 @Component({
@@ -9,6 +11,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+    constructor (private slackOAuthService:SlackOAuthService){}
     
-    
+    OAuthOk = this.slackOAuthService.OAuthOk;
+
 }
