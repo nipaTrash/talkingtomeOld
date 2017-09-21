@@ -23,7 +23,6 @@ export class SlackOAuthService{
     client_secret = '';
 
     
-    
     oauthUrl = 'https://slack.com/api/oauth.access';
     
     
@@ -40,5 +39,4 @@ export class SlackOAuthService{
                 }
             );
     }
-    
-}
+
