@@ -9,16 +9,25 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class ChatService{
     
-    constructor (private http:Http, private slackOAuthService:SlackOAuthService){}
+    OAuthData;
+    OAuthAccessData;
     
-    pruebaDisplay = false;
+    constructor (private http:Http, private slackOAuthService:SlackOAuthService){
+        this.getOAuthAccessData();
+        this.getOAuthData();
+    }
     
-    token: string = this.slackOAuthService.token;
-    channel: string = this.slackOAuthService.channel;
+    getOAuthData(){
+        this.OAuthData = this.slackOAuthService.getOAuthData();
+    }
+    
+    getOAuthAccessData(){
+        this.OAuthAccessData = this.slackOAuthService.getOAuthAccessData();
+    }
     
     sendMessage(messageToSend){
         
-        return this.http.get('https://slack.com/api/chat.postMessage?token='+this.token+'&id=1&type=message&channel='+this.channel+'&text='+messageToSend)
+        return this.http.get('https://slack.com/api/chat.postMessage?token='+this.OAuthAccessData.access_token+'&id=1&type=message&channel='+this.OAuthData.channel+'&text='+messageToSend)
             .toPromise()
             .then((res:any)=>res.json());   
         

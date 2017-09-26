@@ -11,7 +11,7 @@ export class UserService{
     constructor (private http:Http, private slackOAuthService:SlackOAuthService){}
     
     
-    token: string = this.slackOAuthService.token;
+    token: string = '';
 
     getUserInfo(userId){
         

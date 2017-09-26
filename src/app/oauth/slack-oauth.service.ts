@@ -1,41 +1,54 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
+import { OAuth } from './oauth';
 
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class SlackOAuthService{
     
     
-    constructor (private http:Http){}
+    OAuthData:OAuth;
+    OAuthAccessData;
     
-    OAuth = {ok:false,access_token:'notoken'};
-    
-    OAuthToken:string = 'no token';
-    OAuthOk = false;
-    
-    token: string = 'xoxp-242800904082-243689296838-244065043859-5bf833ff7491b01c167c5bf9c30a498as';
-    channel: string = '';
+    constructor (private http:Http){
         
-    client_id = '';
-    client_secret = '';
+        this.setOAuthData().subscribe(
+            data=> {this.OAuthData = data;
+                    console.log(this.OAuthData);
+                   }, 
+            error => console.log(error)
+        );
+    }
+    
+   
+    setOAuthData(){
+        return this.http.get("assets/OAuthData.json")
+            .map((res:any)=>res.json());
+    }
+    
+    getOAuthData(){
+        return this.OAuthData;
+    }
 
+    getOAuthAccessData(){
+        return this.OAuthAccessData;
+    }
     
-    oauthUrl = 'https://slack.com/api/oauth.access';
+    OAuthAccessUrl = 'https://slack.com/api/oauth.access';
     
-    
+    setOAuthAccessData(code:string){
 
-    getOAuth(code:string){
-        return this.http.get(this.oauthUrl+'?client_id='+this.client_id+'&client_secret='+this.client_secret+'&code='+code)
+        return this.http.get(this.OAuthAccessUrl+`?
+                client_id=`+this.OAuthData.client_id+`&
+                client_secret=`+this.OAuthData.client_secret+`&
+                code=`+code)
             .toPromise()
-            //.then(resp=>console.log(resp['_body'].access_token));
             .then(
                 resp=> {
-                    this.OAuth = resp.json(); 
-                    this.OAuthOk = this.OAuth.ok;
-                    this.OAuthToken = this.OAuth.access_token;
-                    console.log(this.OAuthToken)
+                    this.OAuthAccessData = resp.json(); 
                 }
             );
     }

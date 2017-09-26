@@ -9,6 +9,7 @@ export class SlackOAuthDirective{
     
     
     code = '';
+    
 
     constructor (private slackOAuthService:SlackOAuthService){
 
@@ -21,15 +22,16 @@ export class SlackOAuthDirective{
         
         } 
             
-        if (this.code!==''){
-            this.getOAuth(this.code);
+        if (this.code && this.code!==''){
+            this.setOAuthAccessData(this.code);
         }
      
     }
     
-    getOAuth(code:string): void{
+   
+    setOAuthAccessData(code:string): void{
                 
-        this.slackOAuthService.getOAuth(this.code)
+        this.slackOAuthService.setOAuthAccessData(this.code)
 
     }
     
