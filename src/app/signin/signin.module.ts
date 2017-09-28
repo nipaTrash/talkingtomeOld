@@ -1,12 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { MdInputModule } from '@angular/material';
+import { MdCardModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MdButtonModule } from '@angular/material';
 
 import { SignInComponent } from './signin.component';
 import { SignInService } from './signin.service';
 
 @NgModule({
     declarations:[ SignInComponent],
-    imports:[ CommonModule ],
+    imports:[ 
+        CommonModule,
+        MdInputModule,
+        BrowserAnimationsModule,
+        MdCardModule,
+        MdButtonModule,
+        FormsModule
+    ],
     providers:[ SignInService ],
     exports:[ SignInComponent ]
 })

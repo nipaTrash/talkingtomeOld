@@ -1,4 +1,13 @@
-<h1>Accede desde Slack</h1>
+<div class="signin-box">
+
+   <h1>Iniciar desde Slack</h1>
     
-<a [href]="OAuthAuthoriseUrl"><img src="https://api.slack.com/img/sign_in_with_slack.png" /></a>
+    <md-form-field>
+        <input mdInput placeholder="Indica team" [(ngModel)]="inputTeam">
+    </md-form-field>
+    <br/>
+    <a [href]="OAuthAuthoriseUrl"><img src="https://api.slack.com/img/sign_in_with_slack.png" /></a>
+
+</div>
+
 
