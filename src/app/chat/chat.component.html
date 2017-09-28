@@ -2,9 +2,9 @@
     <messages></messages>
 
     <md-form-field>
-      <textarea mdInput placeholder="Escribe mensaje" #message></textarea>
+        <textarea mdInput placeholder="Escribe mensaje" [(ngModel)] = "inputMessage"></textarea>
     </md-form-field>
-    <button md-button (click)="sendMessage(message.value)" color="primary" class="btn-send-message">Enviar</button>
+    <button md-button (click)="sendMessage()" color="primary" class="btn-send-message">Enviar</button>
 
 </md-card>
 

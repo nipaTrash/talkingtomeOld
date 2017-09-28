@@ -13,19 +13,17 @@ import { OAuth } from './oauth/oauth';
 })
 export class AppComponent{
     
-    OAuthData:OAuth;
+    //OAuthData:OAuth;
+    
     OAuthAuthoriseUrl;
     
-    constructor (private slackOAuthService:SlackOAuthService){}
     
     getOAuthUrl(){
-
-        this.OAuthData = this.slackOAuthService.getOAuthData();
         
-        this.OAuthAuthoriseUrl= `https://slack.com/oauth/authorize?
+        /*this.OAuthAuthoriseUrl= `https://slack.com/oauth/authorize?
                 scope=identity.basic&
                 client_id=`+this.OAuthData.client_id+`&
-                redirect_uri=`+this.OAuthData.redirect_uri;
+                redirect_uri=`+this.OAuthData.redirect_uri;*/
         
     }
 

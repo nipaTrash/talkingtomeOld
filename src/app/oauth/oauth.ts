@@ -5,4 +5,5 @@ export class OAuth{
     redirect_uri:string;
     team:string;
     code:string;
+    channel:string;
 }

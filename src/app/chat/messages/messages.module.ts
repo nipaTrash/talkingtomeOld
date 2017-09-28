@@ -6,14 +6,14 @@ import { MdCardModule } from '@angular/material';
 import { MessagesComponent } from './messages.component';
 import { MessageComponent } from './message.component';
 
-import { MessagesService } from './messages.service';
+import { ChatService } from '../chat.service';
 import { UserService } from '../../user/user.service';
 
 
 @NgModule({
     declarations:[ MessagesComponent, MessageComponent ],
     imports:[ CommonModule, MdCardModule ],
-    providers:[ MessagesService, UserService ],
+    providers:[ ChatService, UserService ],
     entryComponents:[ MessageComponent ],
     exports:[ MessagesComponent, MessageComponent ]
 })
