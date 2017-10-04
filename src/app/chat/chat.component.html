@@ -1,10 +1,13 @@
+<p>esto</p>
 <md-card class="chat">
     <messages></messages>
 
     <md-form-field>
-        <textarea mdInput placeholder="Escribe mensaje" [(ngModel)] = "inputMessage"></textarea>
+        <textarea mdInput placeholder="Escribe mensaje" id="textarea" [(ngModel)] = "inputMessage"></textarea>
     </md-form-field>
     <button md-button (click)="sendMessage()" color="primary" class="btn-send-message">Enviar</button>
 
 </md-card>
 
+<button (click)="write()">write</button>
+<div id="write">{{writeText}}</div>

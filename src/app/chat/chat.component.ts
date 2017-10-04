@@ -20,7 +20,7 @@ export class ChatComponent implements OnInit{
     private _code:string='';
     
     inputMessage: string;
-    
+        
     constructor (chatService:ChatService, slackOAuthService:SlackOAuthService){
         
         this._slackOAuthService = slackOAuthService;
@@ -62,5 +62,6 @@ export class ChatComponent implements OnInit{
             );
         
     }
+    
     
 }

@@ -12,7 +12,7 @@ export class SignInComponent implements OnInit{
     
     private _signInService:SignInService;
     
-    team:string;
+    inputTeam:string;
     
     constructor (signInService:SignInService){
         this._signInService = signInService;
@@ -25,7 +25,9 @@ export class SignInComponent implements OnInit{
     }
     
     ngOnInit():any{
+        
         this._signInService.getOAuthData();
-
     }
+    
+   
 }

@@ -12,19 +12,5 @@ import { OAuth } from './oauth/oauth';
     providers: [SlackOAuthService]
 })
 export class AppComponent{
-    
-    //OAuthData:OAuth;
-    
-    OAuthAuthoriseUrl;
-    
-    
-    getOAuthUrl(){
-        
-        /*this.OAuthAuthoriseUrl= `https://slack.com/oauth/authorize?
-                scope=identity.basic&
-                client_id=`+this.OAuthData.client_id+`&
-                redirect_uri=`+this.OAuthData.redirect_uri;*/
-        
-    }
 
 }
