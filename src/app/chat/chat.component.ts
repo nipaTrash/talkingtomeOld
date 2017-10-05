@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ChatService } from './chat.service';
+
+import { Observable } from 'rxjs/Rx';
 
 import { SlackOAuthService } from '../oauth/slack-oauth.service';
 import { OAuth } from '../oauth/oauth';
@@ -11,7 +13,7 @@ import { NgModel } from '@angular/forms';
     templateUrl:'./chat.component.html',
     styleUrls:['./chat.component.css']
 })
-export class ChatComponent implements OnInit{
+export class ChatComponent implements OnInit, AfterViewInit{
 
     
     private _slackOAuthService:SlackOAuthService;
@@ -28,9 +30,17 @@ export class ChatComponent implements OnInit{
         
     } 
     
+    //channels = this._chatService.channels;
+
     get OAuthData():OAuth {
         
         return this._slackOAuthService.OAuthData;
+        
+    }
+    
+    get channels():any {
+        
+        return this._chatService.channels;
         
     }
 
@@ -53,7 +63,23 @@ export class ChatComponent implements OnInit{
         }
      
     }
-     
+    
+    ngAfterViewInit(){
+        /*const sendButton = document.querySelector('#sendBtn');
+        const send$ = Observable.fromEvent(sendButton,'click');
+        const interval$ = Observable.interval(1000);
+        
+        
+        send$ = this.http.get('https://slack.com/api/chat.postMessage?token='+this.OAuthAccessData.access_token+'&id=1&type=message&channel='+this.OAuthData.channel+'&text='+messageToSend)
+            .toPromise(); 
+            
+        send$
+            .switchMap(()=>interval$)
+            .subscribe((x)=>console.log(x));*/
+    }
+    
+    
+    
     sendMessage(){
         
         this._chatService.sendMessage(this.inputMessage)

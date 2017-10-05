@@ -1,7 +1,10 @@
 :host{
     display:block;
-    width:100%;
+    margin:0 auto;
+    float:left;
+    width:69%;
     height:75%;
     overflow-x:hidden;
     overflow-y:scroll;
+    border:1px solid gray;
 }

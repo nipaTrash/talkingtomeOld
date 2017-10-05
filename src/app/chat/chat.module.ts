@@ -12,6 +12,7 @@ import { ChatComponent } from './chat.component';
 import { ChatService } from './chat.service';
 
 import { MessagesModule } from './messages/messages.module';
+import { MenuAsideModule } from './menu.aside/menu.aside.module';
 
 
 
@@ -24,7 +25,8 @@ import { MessagesModule } from './messages/messages.module';
         MdCardModule,
         BrowserAnimationsModule,
         MdButtonModule,
-        MessagesModule
+        MessagesModule,
+        MenuAsideModule
     ],
     providers:[ChatService],
     exports:[ChatComponent]

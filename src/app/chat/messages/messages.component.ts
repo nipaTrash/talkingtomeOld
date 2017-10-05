@@ -1,4 +1,4 @@
-import { Component, OnInit, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver, ViewChild, ViewContainerRef,ElementRef } from '@angular/core';
 
 import { ChatService } from '../chat.service';
 import { UserService } from '../../user/user.service';
@@ -20,7 +20,8 @@ export class MessagesComponent implements OnInit{
     private _userService:UserService;
     
     lastMessageUtc = 0;
-
+    
+    
     constructor (
         chatService:ChatService, 
         userService:UserService, 
@@ -39,7 +40,7 @@ export class MessagesComponent implements OnInit{
     ngOnInit(){
 
         setInterval(()=>{this.updateMessages()}, 1000)
-        
+
     }
     
 
@@ -50,7 +51,14 @@ export class MessagesComponent implements OnInit{
                 .subscribe(
                     newMessages=>{
                         if (newMessages.ok){
-                            newMessages.messages.forEach(message=>{this.writeNewMessage(message)});
+                            
+                            const sortMessages = newMessages.messages;
+                            
+                            sortMessages.sort(function(a,b){
+                                return ((a.ts == b.ts) ? 0 : ((a.ts > b.ts) ? 1 : -1 ));
+                            });
+                            
+                            sortMessages.forEach(message=>{this.writeNewMessage(message)});
                         }
                     },
                     err=>console.log('Problema al cargar nuevos mensajes: '+err) 
@@ -59,7 +67,6 @@ export class MessagesComponent implements OnInit{
         
                         
     }
-    
     
     //Creamos un messageComponent por mensaje que se reciba
     @ViewChild ("newMessageContainer", {read:ViewContainerRef}) newMessageContainer;
@@ -88,7 +95,7 @@ export class MessagesComponent implements OnInit{
             );
         
         if (this.lastMessageUtc < messageInfo.ts) this.lastMessageUtc = messageInfo.ts;
-
+        
     }
     
     
