@@ -112,12 +112,12 @@ export class ChatService{
     }
     
     getChannels(){
-        //temporal
-        return this.http.get("assets/channelsTemp.json")
-            .map((res:any)=>res.json());
-    
-        /*return this.http.get(`https://slack.com/api/channels.list?token=`+this._OAuthAccessData.access_token)
+
+        /*return this.http.get("assets/channelsTemp.json")
             .map((res:any)=>res.json());*/
+    
+        return this.http.get(`https://slack.com/api/channels.list?token=`+this._OAuthAccessData.access_token)
+            .map((res:any)=>res.json());
     }
     
     getGroups (){
@@ -125,16 +125,16 @@ export class ChatService{
             .map((res:any)=>res.json());
     }
     getTeamInfo (){
-        return this.http.get("assets/teamInfoTemp.json")
-            .map((res:any)=>res.json());
-        /*return this.http.get(`https://slack.com/api/team.info?token=`+this._OAuthAccessData.access_token)
+        /*return this.http.get("assets/teamInfoTemp.json")
             .map((res:any)=>res.json());*/
+        return this.http.get(`https://slack.com/api/team.info?token=`+this._OAuthAccessData.access_token)
+            .map((res:any)=>res.json());
     }
     getMembers (){
-        return this.http.get("assets/membersTemp.json")
-            .map((res:any)=>res.json());
-        /*return this.http.get(`https://slack.com/api/users.list?token=`+this._OAuthAccessData.access_token)
+        /*return this.http.get("assets/membersTemp.json")
             .map((res:any)=>res.json());*/
+        return this.http.get(`https://slack.com/api/users.list?token=`+this._OAuthAccessData.access_token)
+            .map((res:any)=>res.json());
     }
     
     getNewMessages(utcFrom){
