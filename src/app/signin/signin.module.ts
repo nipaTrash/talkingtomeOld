@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { SlackOAuthService } from '../oauth/slack-oauth.service';
+
 import { MdInputModule } from '@angular/material';
 import { MdCardModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,7 +22,7 @@ import { SignInService } from './signin.service';
         MdButtonModule,
         FormsModule
     ],
-    providers:[ SignInService ],
+    providers:[ SignInService, SlackOAuthService ],
     exports:[ SignInComponent ]
 })
 export class SignInModule{ }

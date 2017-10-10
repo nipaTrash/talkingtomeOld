@@ -14,6 +14,7 @@ export class SignInService{
     constructor (slackOAuthService:SlackOAuthService){
         this._slackOAuthService = slackOAuthService;
     }
+    
     getOAuthData(){
         this._slackOAuthService.getOAuthData()
             .subscribe(

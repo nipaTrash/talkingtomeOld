@@ -9,7 +9,7 @@ import { NgModel } from '@angular/forms';
     styleUrls:['./signin.component.css']
 })
 export class SignInComponent implements OnInit{
-    
+
     private _signInService:SignInService;
     
     inputTeam:string;

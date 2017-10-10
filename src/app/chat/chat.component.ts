@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChatService } from './chat.service';
 
 import { Observable } from 'rxjs/Rx';
@@ -13,7 +13,7 @@ import { NgModel } from '@angular/forms';
     templateUrl:'./chat.component.html',
     styleUrls:['./chat.component.css']
 })
-export class ChatComponent implements OnInit, AfterViewInit{
+export class ChatComponent implements OnInit{
 
     
     private _slackOAuthService:SlackOAuthService;
@@ -23,6 +23,8 @@ export class ChatComponent implements OnInit, AfterViewInit{
     
     inputMessage: string;
         
+    private _url = new URL(window.location.href);
+
     constructor (chatService:ChatService, slackOAuthService:SlackOAuthService){
         
         this._slackOAuthService = slackOAuthService;
@@ -30,7 +32,6 @@ export class ChatComponent implements OnInit, AfterViewInit{
         
     } 
     
-    //channels = this._chatService.channels;
 
     get OAuthData():OAuth {
         
@@ -46,47 +47,43 @@ export class ChatComponent implements OnInit, AfterViewInit{
 
     ngOnInit(){
 
-        //Sacamos el code del href
-        const hrefValue = window.location.href;
-        this._code = hrefValue.split('code=')[1];
-
-        if (this._code) {
-            
-            this._code = this._code.split('&')[0];
-        
-        } 
-            
+        this.getOAuthCodeFromUrl();
+        this.setOAuthCode();   
+     
+    }
+    
+    getOAuthCodeFromUrl(){
+                
+        this._code = this._url.searchParams.get('code');
+    
+    }
+    setOAuthCode(){
         if (this._code && this._code!==''){
             
             this._chatService.setOAuthAccessData(this._code);
             
         }
-     
     }
     
-    ngAfterViewInit(){
-        /*const sendButton = document.querySelector('#sendBtn');
-        const send$ = Observable.fromEvent(sendButton,'click');
-        const interval$ = Observable.interval(1000);
+    public onSend():void {
+
+        const message = (<HTMLInputElement>document.getElementById("messageToSend")).value;
+
+        this._sendMessage(message)
+            .then(()=>this._cleanInput());
         
-        
-        send$ = this.http.get('https://slack.com/api/chat.postMessage?token='+this.OAuthAccessData.access_token+'&id=1&type=message&channel='+this.OAuthData.channel+'&text='+messageToSend)
-            .toPromise(); 
-            
-        send$
-            .switchMap(()=>interval$)
-            .subscribe((x)=>console.log(x));*/
     }
     
     
+    private _sendMessage(messageToSend){
+        
+        return this._chatService.sendMessage(messageToSend);
+           
+    }
     
-    sendMessage(){
+    private _cleanInput():void {
         
-        this._chatService.sendMessage(this.inputMessage)
-            .then(
-                ()=>this.inputMessage = ''
-            );
-        
+        (<HTMLInputElement>document.getElementById("messageToSend")).value = "";
     }
     
     

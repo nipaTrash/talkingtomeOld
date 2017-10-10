@@ -4,7 +4,6 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
 
-import { SlackOAuthService } from './oauth/slack-oauth.service';
 import { ChatModule } from './chat/chat.module';
 import { SignInModule } from './signin/signin.module';
 
@@ -12,7 +11,6 @@ import { AppComponent } from './app.component';
 
 import { ChatComponent } from './chat/chat.component';
 import { SignInComponent } from './signin/signin.component';
-
 
 const appRoutes: Routes =[
     {path:'', component:SignInComponent},
@@ -30,10 +28,14 @@ const appRoutes: Routes =[
     SignInModule,
     RouterModule.forRoot(
         appRoutes,
-        {enableTracing: true}
+        {enableTracing: true},
     )
   ],
-  providers: [ SlackOAuthService ],
+  providers: [  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    
+    
+
+}
