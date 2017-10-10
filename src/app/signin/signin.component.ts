@@ -10,6 +10,10 @@ import { NgModel } from '@angular/forms';
 })
 export class SignInComponent implements OnInit{
 
+    
+    public signinSlack: string = 'signin from slack';
+    public yourTeam: string = 'your team';
+    
     private _signInService:SignInService;
     
     inputTeam:string;

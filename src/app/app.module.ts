@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ChatModule } from './chat/chat.module';
 import { SignInModule } from './signin/signin.module';
+import { TranslateModule } from './translate/translate.module';
 
 import { AppComponent } from './app.component';
 
@@ -25,6 +26,7 @@ const appRoutes: Routes =[
     BrowserModule,
     HttpModule,
     ChatModule,
+    TranslateModule,
     SignInModule,
     RouterModule.forRoot(
         appRoutes,

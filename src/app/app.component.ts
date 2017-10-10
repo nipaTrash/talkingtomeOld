@@ -13,5 +13,5 @@ import { OAuth } from './oauth/oauth';
 })
 export class AppComponent{
 
-    
+    welcome = 'welcome';
 }

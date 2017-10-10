@@ -1,0 +1,27 @@
+{  
+    "languages":[
+        {"key":"en","value":"english"},
+        {"key":"es","value":"español"},
+        {"key":"it","value":"italiani"}
+    ],
+    "signin from slack":{
+        "en":"signin from slack",
+        "es":"iniciar desde Slack",
+        "it":"accedi da Slack"
+    },
+    "send":{
+        "en":"send",
+        "es":"enviar",
+        "it":"inviare"
+    },
+    "welcome":{
+        "en":"welcome",
+        "es":"bienvenido",
+        "it":"benvenuto"
+    },
+    "your team":{
+        "en":"your team",
+        "es":"Tu equipo",
+        "it":"la tua squadra"
+    }
+}

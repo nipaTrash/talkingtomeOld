@@ -12,6 +12,8 @@ import { MdButtonModule } from '@angular/material';
 import { SignInComponent } from './signin.component';
 import { SignInService } from './signin.service';
 
+import { TranslateModule } from '../translate/translate.module';
+
 @NgModule({
     declarations:[ SignInComponent],
     imports:[ 
@@ -20,7 +22,8 @@ import { SignInService } from './signin.service';
         BrowserAnimationsModule,
         MdCardModule,
         MdButtonModule,
-        FormsModule
+        FormsModule,
+        TranslateModule
     ],
     providers:[ SignInService, SlackOAuthService ],
     exports:[ SignInComponent ]

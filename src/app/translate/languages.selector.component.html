@@ -1,0 +1,4 @@
+
+    <select (change)="changeLanguage($event.target.value)">
+        <option *ngFor="let language of translatorTexts.languages" [value]="language.key" [attr.selected]="languageActive==language.key ? true : null">{{language.value}}</option>
+    </select>

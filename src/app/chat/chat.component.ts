@@ -15,6 +15,7 @@ import { NgModel } from '@angular/forms';
 })
 export class ChatComponent implements OnInit{
 
+    public send:string = 'send';
     
     private _slackOAuthService:SlackOAuthService;
     private _chatService:ChatService;
