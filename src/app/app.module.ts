@@ -1,12 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { RouterModule, Routes } from '@angular/router';
 
-import { OAuthModule } from './oauth/oauth.module';
-//import { SlackOAuthDirective } from './slack-oauth.directive';
+
+import { ChatModule } from './chat/chat.module';
+import { SignInModule } from './signin/signin.module';
 
 import { AppComponent } from './app.component';
-import { ChatModule } from './chat/chat.module';
+
+import { ChatComponent } from './chat/chat.component';
+import { SignInComponent } from './signin/signin.component';
+
+const appRoutes: Routes =[
+    {path:'', component:SignInComponent},
+    {path:'chat', component:ChatComponent}
+]
 
 @NgModule({
   declarations: [
@@ -14,11 +23,19 @@ import { ChatModule } from './chat/chat.module';
   ],
   imports: [
     BrowserModule,
-    ChatModule,
     HttpModule,
-    OAuthModule
+    ChatModule,
+    SignInModule,
+    RouterModule.forRoot(
+        appRoutes,
+        {enableTracing: true},
+    )
   ],
-  providers: [],
+  providers: [  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    
+    
+
+}

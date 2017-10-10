@@ -1,11 +1,15 @@
 .chat{
+    display:block;
     margin:0 auto;
-    float:left;
-    width:400px;
+    width:800px;
     height:500px;
     overflow:hidden;
 }
-md-form-field,
+md-form-field{
+    display:block;
+    float:left;
+    width:69%;
+}
 #message{
     width:100%;
 }

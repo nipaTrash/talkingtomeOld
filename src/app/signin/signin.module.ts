@@ -9,28 +9,20 @@ import { MdCardModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdButtonModule } from '@angular/material';
 
-
-import { ChatComponent } from './chat.component';
-import { ChatService } from './chat.service';
-
-import { MessagesModule } from './messages/messages.module';
-import { MenuAsideModule } from './menu.aside/menu.aside.module';
-
-
+import { SignInComponent } from './signin.component';
+import { SignInService } from './signin.service';
 
 @NgModule({
-    declarations:[ChatComponent],
-    imports:[
+    declarations:[ SignInComponent],
+    imports:[ 
         CommonModule,
-        FormsModule,
         MdInputModule,
-        MdCardModule,
         BrowserAnimationsModule,
+        MdCardModule,
         MdButtonModule,
-        MessagesModule,
-        MenuAsideModule
+        FormsModule
     ],
-    providers:[ ChatService, SlackOAuthService],
-    exports:[ChatComponent]
+    providers:[ SignInService, SlackOAuthService ],
+    exports:[ SignInComponent ]
 })
-export class ChatModule{}
+export class SignInModule{ }

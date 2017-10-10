@@ -1,10 +1,10 @@
 <md-card class="chat">
+   <menu-aside></menu-aside>
     <messages></messages>
 
     <md-form-field>
-      <textarea mdInput placeholder="Escribe mensaje" #message></textarea>
+        <textarea mdInput id="messageToSend" placeholder="Write your message" i18n-placeholder="From placeholder"></textarea>
     </md-form-field>
-    <button md-button (click)="sendMessage(message.value)" color="primary" class="btn-send-message">Enviar</button>
+    <button md-button (click)="onSend()" color="primary" class="btn-send-message" i18n>Send</button>
 
 </md-card>
-

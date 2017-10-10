@@ -1,14 +1,17 @@
-<md-card>
 
-   
-    <!--<div md-card-avatar [ngStyle]="{background: 'url(' ++ ')'}" class="message-avatar"></div>-->
+<md-card [id]="messageInfo.ts">
+
+    <div md-card-avatar [ngStyle]="{background: 'url(' +userInfo?.image_24+ ')'}" class="message-avatar"></div>
     
     <md-card-title>
         <strong>{{userInfo?.real_name}}</strong>  
         {{ (messageInfo?.ts*1000) | date:"shortTime" }}
-    
     </md-card-title>
     <md-card-content>{{messageInfo.text}}</md-card-content>
 
+   
+    <md-card-actions>
+        <button md-button (click)="deleteMessage(messageInfo)">DELETE</button>
+    </md-card-actions>
 
 </md-card>

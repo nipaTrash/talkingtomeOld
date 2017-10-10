@@ -1,13 +1,13 @@
-import { Component, OnInit, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver, ViewChild, ViewContainerRef,ElementRef } from '@angular/core';
 
-import { MessagesService } from './messages.service';
+import { ChatService } from '../chat.service';
 import { UserService } from '../../user/user.service';
 
 import { UserInfo } from '../../user/user-info';
 
 import { MessageComponent } from './message.component';
+import { OAuthAccessData } from '../../oauth/oauth-access-data';
 
-import 'rxjs/add/operator/map';
 
 @Component({
     selector:'messages',
@@ -16,46 +16,59 @@ import 'rxjs/add/operator/map';
 })
 export class MessagesComponent implements OnInit{
     
- 
+    private _chatService:ChatService;
+    private _userService:UserService;
+    
+    lastMessageUtc = 0;
+    
+    
     constructor (
-        private messagesService:MessagesService, 
-        private userService:UserService, 
+        chatService:ChatService, 
+        userService:UserService, 
         private resolver:ComponentFactoryResolver
         ){
-        
+            
+        this._chatService = chatService;
+        this._userService = userService;
+
+    }
+       
+    get OAuthAccessData():OAuthAccessData {
+        return this._chatService.OAuthAccessData;
+    }
+    
+    ngOnInit(){
+
         setInterval(()=>{this.updateMessages()}, 1000)
 
     }
-        
-    ngOnInit(){
-
-        this.messagesService.getConversationHistory()
-            .subscribe(
-                messages=>{
-                    if (messages.ok){
-                        messages.messages.forEach(message=>{this.writeNewMessage(message)})  
-                    }
-                },
-                err=>console.log('Problema al cargar historial: ' +err)
-            )
-    }
     
-    lastMessageUtc = 0;
 
     updateMessages(){
-                
-        this.messagesService.getNewMessages(this.lastMessageUtc)
-            .subscribe(
-                newMessages=>{
-                    if (newMessages.ok){
-                        newMessages.forEach(message=>{this.writeNewMessage(message)});
-                    }
-                },
-                err=>console.log('Problema al cargar nuevos mensajes: '+err) 
-            )
+        if (this.OAuthAccessData){ 
+
+            this._chatService.getNewMessages(this.lastMessageUtc)
+                .subscribe(
+                    newMessages=>{
+                        if (newMessages.ok){
+                            
+                            const sortMessages = newMessages.messages;
+                            
+                            sortMessages.sort(function(a,b){
+                                return ((a.ts == b.ts) ? 0 : ((a.ts > b.ts) ? 1 : -1 ));
+                            });
+                            
+                            sortMessages.forEach(message=>{this.writeNewMessage(message)});
+                        }
+                    },
+                    err=>console.log('Problema al cargar nuevos mensajes: '+err) 
+                )
+        }  
+        
                         
     }
     
+    //Creamos un messageComponent por mensaje que se reciba
     @ViewChild ("newMessageContainer", {read:ViewContainerRef}) newMessageContainer;
 
     writeNewMessage(messageInfo){
@@ -64,14 +77,14 @@ export class MessagesComponent implements OnInit{
             Una vez obenemos la informacion del usuario mostramos el mensaje
         */
         let userInfo;
-        this.userService.getUserInfo(messageInfo.user)
+        this._userService.getUserInfo(messageInfo.user)
             .subscribe(
                 user=>{
                     if (user.profile){
                         userInfo = user.profile;
                     }
                 },
-                err=>console.log('There was an error: '+err),
+                err=>console.log('Problema al excribir mensaje: '+err),
                 ()=>{
                     const messageFactory = this.resolver.resolveComponentFactory(MessageComponent);
                     const messageRef = this.newMessageContainer.createComponent(messageFactory);
@@ -82,7 +95,7 @@ export class MessagesComponent implements OnInit{
             );
         
         if (this.lastMessageUtc < messageInfo.ts) this.lastMessageUtc = messageInfo.ts;
-
+        
     }
     
     

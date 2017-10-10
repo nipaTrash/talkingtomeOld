@@ -11,6 +11,7 @@ md-card-title{
 md-card{
     margin:0;
     padding:10px;
+    text-align:left;
 }
 md-card-content{
     padding:10px 2px;
@@ -21,4 +22,20 @@ md-card-content{
     float:left;
     height:30px;
     width:30px;
+}
+button.message-delete {
+  float:right;
+  margin-top: 2px;
+  margin-right: .8em;
+  background-color: gray !important;
+  color:white;
+}
+md-card-actions{
+    float:right;
+    padding:5px;
+    margin-top:-30px;
+    margin-right:10px;
+}
+md-button{
+    padding:5px;
 }

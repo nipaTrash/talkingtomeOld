@@ -1,0 +1,8 @@
+<div class="menu-aside-header">{{teamInfo?.team?.name}}</div>
+<div class="menu-aside-title">Channels</div>
+
+<div class="menu-aside-member-item" *ngFor="let channel of channels?.channels"># {{channel?.name}}</div>
+<hr>
+
+<div class="menu-aside-title">Members</div>
+<menu-aside-member *ngFor="let member of members?.members" [memberInfo] = "member"></menu-aside-member>
