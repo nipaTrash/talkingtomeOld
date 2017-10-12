@@ -14,7 +14,7 @@ export class TranslateService{
         this._http = http;
     }
     
-    private _translatorTexts;
+    private _translatorTexts:Object;
     
     private _languageActive:string = "es";
     
@@ -36,7 +36,7 @@ export class TranslateService{
         
     }
     
-    changeLanguage(language){
+    changeLanguage(language):void{
         this._languageActive = language;
     }
     

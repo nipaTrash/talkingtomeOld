@@ -9,6 +9,8 @@ import { ChatService } from '../chat.service';
 })
 export class MenuAsideComponent{
     
+    txtChannels:string = "channels";
+    txtMembers:string = "members";
     private _chatService:ChatService;
     
     constructor (chatService:ChatService){

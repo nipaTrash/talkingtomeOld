@@ -3,7 +3,9 @@
     <messages></messages>
 
     <md-form-field>
-        <textarea mdInput id="messageToSend" placeholder="Write your message" i18n-placeholder="From placeholder"></textarea>
+        <!--<textarea mdInput id="messageToSend" placeholder="Write your message" i18n-placeholder="From placeholder"></textarea>-->
+
+        <textarea mdInput id="messageToSend" [placeholder]="'tal'" translate></textarea>
     </md-form-field>
     <button md-button (click)="onSend()" color="primary" class="btn-send-message" [translate]="send"></button>
 

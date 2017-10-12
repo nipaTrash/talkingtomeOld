@@ -2,9 +2,10 @@
 
    <h2 [translate]="signinSlack"></h2>
 
-    <md-form-field>
-        <input mdInput [placeholder]="yourTeam" [translate]="yourTeam">
-    </md-form-field>
+    <!--<md-form-field>
+        <input mdInput [placeholder]="'tal'" translate>
+    </md-form-field>-->
+    <input type="text" placeholder="quesicual" [placeholder]="yourTeam" translate>
     <br/>
     <a [href]="OAuthAuthoriseUrl"><img src="https://api.slack.com/img/sign_in_with_slack.png" /></a>
 

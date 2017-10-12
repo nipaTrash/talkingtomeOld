@@ -23,5 +23,21 @@
         "en":"your team",
         "es":"Tu equipo",
         "it":"la tua squadra"
+    },
+    "channels":{
+        "en":"channels",
+        "es":"canales",
+        "it":"canali"
+    },
+    "memberss":{
+        "en":"no",
+        "es":"no",
+        "it":"no"
+    },
+    "tal":{
+        "en":"what",
+        "es":"quesi",
+        "it":"tali"
     }
+    
 }

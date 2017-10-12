@@ -16,7 +16,7 @@ import { ChatService } from './chat.service';
 import { MessagesModule } from './messages/messages.module';
 import { MenuAsideModule } from './menu.aside/menu.aside.module';
 
-
+import { TranslateModule } from '../translate/translate.module';
 
 @NgModule({
     declarations:[ChatComponent],
@@ -28,7 +28,8 @@ import { MenuAsideModule } from './menu.aside/menu.aside.module';
         BrowserAnimationsModule,
         MdButtonModule,
         MessagesModule,
-        MenuAsideModule
+        MenuAsideModule,
+        TranslateModule
     ],
     providers:[ ChatService, SlackOAuthService],
     exports:[ChatComponent]

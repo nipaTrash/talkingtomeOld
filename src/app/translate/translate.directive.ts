@@ -19,12 +19,13 @@ export class TranslateDirective{
         return this._translateService.languageActive;
     }
     
-    @Input() translate;
+    @Input('translate') translate;
     
     @HostBinding() get innerText(){
         
         const textToGet = this.translate; 
-        return this.translatorTexts[textToGet][this.languageActive];
+        
+        return this._translate(textToGet);
 
     }
     
@@ -32,4 +33,22 @@ export class TranslateDirective{
         this._translateService = translateService;
     }
     
+    @Input ('placeholder') placeholder;
+    
+    @HostBinding('attr.placeholder')get translater(){
+
+        const textToGet = this.placeholder; 
+        
+        return this._translate(textToGet);
+    }
+    
+    private _translate(textToGet){
+        
+        if (this.translatorTexts[textToGet] !== undefined){
+            return this.translatorTexts[textToGet][this.languageActive];
+        }else{
+            return textToGet;
+        }
+        
+    }
 }
